@@ -2,4 +2,24 @@
 
 - https://agentskills.io/home
   - https://github.com/agentskills/agentskills
+  - https://github.com/anthropics/skills/tree/main/template
+  - https://agentskills.io/what-are-skills#how-skills-work
+    - "Discovery: At startup, agents load only the name and description of each available skill, just enough to know when it might be relevant."
+  - Validation: https://github.com/agentskills/agentskills/tree/main/skills-ref
+  - https://agentskills.io/skill-creation/best-practices
 - https://ona.com/
+- https://autohand.ai/
+- https://sockpuppet.org/blog/2026/03/30/vulnerability-research-is-cooked/
+  - https://blog.andymasley.com/p/the-ai-water-issue-is-fake
+- https://github.com/vercel-labs/agent-skills
+  - https://skills.sh/vercel-labs/agent-skills
+  - https://github.com/vercel-labs/agent-skills/blob/73140fc5b3a214ad3222bcf557b397b3c02d11c1/README.md#license: MIT
+  - https://github.com/vercel-labs/agent-skills/blob/73140fc5b3a214ad3222bcf557b397b3c02d11c1/skills/react-best-practices/SKILL.md
+  - https://github.com/vercel-labs/agent-skills/blob/73140fc5b3a214ad3222bcf557b397b3c02d11c1/AGENTS.md#troubleshooting
+    - "- **Keep SKILL.md under 500 lines** — put detailed reference material in separate files"
+    - "- **Prefer scripts over inline code** — script execution doesn't consume context (only output does)"
+    - "- **File references work one level deep** — link directly from SKILL.md to supporting files"
+  - https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices
+- https://kiro.dev/docs/skills/
+- https://github.com/remotion-dev/skills
+- https://github.com/wshobson/agents/tree/main/plugins/javascript-typescript/skills/modern-javascript-patterns
