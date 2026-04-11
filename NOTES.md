@@ -35,3 +35,28 @@
 - https://github.com/remotion-dev/skills
 - https://github.com/wshobson/agents/tree/main/plugins/javascript-typescript/skills/modern-javascript-patterns
 - https://react.dev/learn/you-might-not-need-an-effect
+
+## Snippets
+
+- https://github.com/shuding/better-all/discussions/3
+- https://github.com/shuding/better-all
+- https://github.com/vercel-labs/agent-skills/blob/73140fc5b3a214ad3222bcf557b397b3c02d11c1/skills/react-best-practices/rules/async-dependencies.md
+
+```ts
+const promiseA = getA();
+const promiseB = getB();
+const promiseC = getC(await promiseA); // or const promiseC = promiseA.then(getC)
+
+const [a, b, c] = await Promise.all([promiseA, promiseB, promiseC]);
+```
+
+```ts
+const userPromise = fetchUser();
+const profilePromise = userPromise.then((user) => fetchProfile(user.id));
+
+const [user, config, profile] = await Promise.all([
+  userPromise,
+  fetchConfig(),
+  profilePromise,
+]);
+```
