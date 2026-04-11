@@ -7,6 +7,17 @@
     - "Discovery: At startup, agents load only the name and description of each available skill, just enough to know when it might be relevant."
   - Validation: https://github.com/agentskills/agentskills/tree/main/skills-ref
   - https://agentskills.io/skill-creation/best-practices
+  - https://agentskills.io/specification#references%2F
+    - "Contains additional documentation that agents can read when needed:"
+    - "Keep individual reference files focused. Agents load these on demand, so smaller files mean less use of context."
+  - https://agentskills.io/skill-creation/optimizing-descriptions
+    - "The `description` field in your `SKILL.md` frontmatter is the primary mechanism agents use to decide whether to load a skill for a given task."
+    - "This means the description carries the entire burden of triggering. If the description doesn't convey when the skill is useful, the agent won't know to reach for it."
+    - "A simple, one-step request like "read this PDF" may not trigger a PDF skill even if the description matches perfectly, because the agent can handle it with basic tools."
+    - "Use imperative phrasing. Frame the description as an instruction to the agent: "Use this skill when..." rather than "This skill does...""
+    - "Explicitly list contexts where the skill applies (...)"
+    - "The specification enforces a hard limit of 1024 characters."
+    - Example: "**Analyze** CSV and tabular data files — compute summary statistics, add derived columns, generate charts, and clean messy data. **Use this skill when** the user has a CSV, TSV, or Excel file and wants to explore, transform, or visualize the data, **even if** they don't explicitly mention "CSV" or "analysis.""
 - https://ona.com/
 - https://autohand.ai/
 - https://sockpuppet.org/blog/2026/03/30/vulnerability-research-is-cooked/
@@ -23,3 +34,4 @@
 - https://kiro.dev/docs/skills/
 - https://github.com/remotion-dev/skills
 - https://github.com/wshobson/agents/tree/main/plugins/javascript-typescript/skills/modern-javascript-patterns
+- https://react.dev/learn/you-might-not-need-an-effect
