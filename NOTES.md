@@ -39,6 +39,8 @@
   - "Add `disable-model-invocation: true` if you only want manual invocation"
 - https://www.skills.sh/google-gemini/gemini-cli/code-reviewer
 - https://github.com/mattpocock/skills
+  - "Capture the diff command once: `git diff <fixed-point>...HEAD` (three-dot, so the comparison is against the merge-base). Also note the list of commits via `git log <fixed-point>..HEAD --oneline`."
+- https://stackoverflow.com/questions/8839958/how-does-origin-head-get-set: "origin/HEAD represents the default branch on the remote (...)"
 
 ## Snippets
 
