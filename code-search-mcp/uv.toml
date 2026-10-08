@@ -1,5 +1,5 @@
 add-bounds = "exact"
-exclude-newer = "7 days"
+exclude-newer = "1 days"
 python-downloads = "manual"
 python-preference = "only-managed"
 required-version = "==0.11.6"
