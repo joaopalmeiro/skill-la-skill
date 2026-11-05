@@ -21,7 +21,7 @@ model = SentenceTransformer(
     processor_kwargs={"model_max_length": 8192},
 )
 
-mcp = MCPServer("code-search")
+mcp = MCPServer("Code Search")
 
 
 class Hit(TypedDict):
@@ -45,7 +45,7 @@ def load_index() -> LanceTable:
 
 @mcp.tool()
 def search_code(query: str, top_k: int = 5) -> list[Hit]:
-    """Semantic search over the Python files of selected local repos. Returns the most relevant file paths."""
+    """Search the user's personal projects for existing code to use as reference."""
     table = load_index()
     query_embedding = model.encode(query, prompt_name="CodeRetrieval", show_progress_bar=False)
 
