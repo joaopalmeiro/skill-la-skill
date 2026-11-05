@@ -4,6 +4,7 @@ from typing import TypedDict
 from lancedb import LanceDBConnection
 from lancedb.table import LanceTable
 from mcp.server import MCPServer
+from mcp.types import ToolAnnotations
 from rgapi import fd
 from sentence_transformers import SentenceTransformer
 
@@ -43,9 +44,11 @@ def load_index() -> LanceTable:
         return db.create_table(TABLE_NAME, data=rows)
 
 
-@mcp.tool()
+@mcp.tool(
+    description="Search the user's personal projects for existing code to use as reference.",
+    annotations=ToolAnnotations(read_only_hint=True, open_world_hint=False),
+)
 def search_code(query: str, top_k: int = 5) -> list[Hit]:
-    """Search the user's personal projects for existing code to use as reference."""
     table = load_index()
     query_embedding = model.encode(query, prompt_name="CodeRetrieval", show_progress_bar=False)
 

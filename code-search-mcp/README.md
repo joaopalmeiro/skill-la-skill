@@ -26,7 +26,7 @@ code ~/.kiro/settings/mcp.json
         "server.py"
       ],
       "disabled": false,
-      "autoApprove": ["*"]
+      "autoApprove": ["search_code"]
     }
   }
 }
