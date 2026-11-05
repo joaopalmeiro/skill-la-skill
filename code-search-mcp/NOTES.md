@@ -13,3 +13,5 @@
 - https://huggingface.co/docs/transformers/main/en/model_doc/embedding_gemma2
 - https://py.sdk.modelcontextprotocol.io/
 - https://minish.ai/packages/model2vec/integrations/#sentence-transformers
+- https://kiro.dev/docs/mcp/configuration/
+- https://py.sdk.modelcontextprotocol.io/get-started/real-host/#the-launch-command

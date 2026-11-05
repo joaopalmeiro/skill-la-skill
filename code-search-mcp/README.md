@@ -4,6 +4,34 @@
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
 
+## Usage
+
+### Kiro
+
+```bash
+code ~/.kiro/settings/mcp.json
+```
+
+```json
+{
+  "mcpServers": {
+    "code-search": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--with",
+        "mcp[cli]==2.3.0",
+        "mcp",
+        "run",
+        "/Users/joao.palmeiro/Documents/GitHub/skill-la-skill/code-search-mcp/server.py"
+      ],
+      "disabled": false,
+      "autoApprove": ["TODO"]
+    }
+  }
+}
+```
+
 ## Development
 
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/) (if necessary):
@@ -21,7 +49,7 @@ uv audit --verbose
 ```
 
 ```bash
-uv run python 01.py
+uv run mcp dev server.py
 ```
 
 ```bash
