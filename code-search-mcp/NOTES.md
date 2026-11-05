@@ -15,3 +15,9 @@
 - https://minish.ai/packages/model2vec/integrations/#sentence-transformers
 - https://kiro.dev/docs/mcp/configuration/
 - https://py.sdk.modelcontextprotocol.io/get-started/real-host/#the-launch-command
+- https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html
+- https://github.com/sqliteai/sqlite-vector
+- https://huggingface.co/learn/llm-course/chapter5/6
+- https://github.com/asg017/sqlite-vec
+- https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html#manual-implementation
+- https://github.com/AnswerDotAI/rgapi

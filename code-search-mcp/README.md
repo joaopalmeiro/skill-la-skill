@@ -19,14 +19,14 @@ code ~/.kiro/settings/mcp.json
       "command": "uv",
       "args": [
         "run",
-        "--with",
-        "mcp[cli]==2.3.0",
+        "--directory",
+        "/Users/joao.palmeiro/Documents/GitHub/skill-la-skill/code-search-mcp",
         "mcp",
         "run",
-        "/Users/joao.palmeiro/Documents/GitHub/skill-la-skill/code-search-mcp/server.py"
+        "server.py"
       ],
       "disabled": false,
-      "autoApprove": ["TODO"]
+      "autoApprove": ["search_code"]
     }
   }
 }
