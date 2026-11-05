@@ -11,3 +11,5 @@
   - https://github.com/huggingface/transformers/blob/v5.19.0/src/transformers/utils/import_utils.py#L2201
 - https://github.com/huggingface/transformers/releases/tag/v5.19.0
 - https://huggingface.co/docs/transformers/main/en/model_doc/embedding_gemma2
+- https://py.sdk.modelcontextprotocol.io/
+- https://minish.ai/packages/model2vec/integrations/#sentence-transformers
