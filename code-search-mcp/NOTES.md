@@ -26,3 +26,6 @@
 - https://www.lancedb.com/blog/lance-data-viewer
 - https://duckdb.org/docs/2.0/core_extensions/lance
 - https://github.com/lancedb/lancedb/blob/57cd31e1aa9960a4073993dd326305058ca1a53d/python/python/lancedb/__init__.py#L267-L344: `-> DBConnection` vs. `LanceDBConnection`
+- https://py.sdk.modelcontextprotocol.io/servers/structured-output/
+- https://en.wikipedia.org/wiki/Cosine_similarity
+- https://huggingface.co/google/embeddinggemma-2/blob/914f7f89142e33e77833254d9c9b90c3cef7303b/config_sentence_transformers.json#L37: `"similarity_fn_name": "cosine"`

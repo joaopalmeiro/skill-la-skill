@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import TypedDict
 
 from lancedb import LanceDBConnection
 from lancedb.table import LanceTable
@@ -23,6 +24,11 @@ model = SentenceTransformer(
 mcp = MCPServer("code-search")
 
 
+class Hit(TypedDict):
+    path: str
+    score: float
+
+
 def load_index() -> LanceTable:
     db = LanceDBConnection(DB_PATH)
     try:
@@ -38,17 +44,11 @@ def load_index() -> LanceTable:
 
 
 @mcp.tool()
-def search_code(query: str, top_k: int = 5) -> str:
+def search_code(query: str, top_k: int = 5) -> list[Hit]:
     """Semantic search over the Python files of selected local repos. Returns the most relevant file paths."""
     table = load_index()
     query_embedding = model.encode(query, prompt_name="CodeRetrieval", show_progress_bar=False)
 
-    # Without a vector index, LanceDB compares the query against every row (exact search).
     results = table.search(query_embedding).distance_type("cosine").select(["path", "_distance"]).limit(top_k).to_list()
 
-    # Cosine distance is `1 - cosine similarity`, so convert it back to a similarity score.
-    return "\n".join(f"{1 - row['_distance']:.3f} {row['path']}" for row in results)
-
-
-if __name__ == "__main__":
-    load_index()
+    return [{"path": row["path"], "score": 1 - row["_distance"]} for row in results]
