@@ -21,3 +21,8 @@
 - https://github.com/asg017/sqlite-vec
 - https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html#manual-implementation
 - https://github.com/AnswerDotAI/rgapi
+- https://docs.lancedb.com/ingestion/create-table#open-an-existing-table
+- https://docs.lancedb.com/search/vector-search
+- https://www.lancedb.com/blog/lance-data-viewer
+- https://duckdb.org/docs/2.0/core_extensions/lance
+- https://github.com/lancedb/lancedb/blob/57cd31e1aa9960a4073993dd326305058ca1a53d/python/python/lancedb/__init__.py#L267-L344: `-> DBConnection` vs. `LanceDBConnection`
