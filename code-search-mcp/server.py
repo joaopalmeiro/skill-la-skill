@@ -1,15 +1,15 @@
-from functools import cache
 from pathlib import Path
 
-import numpy as np
-import numpy.typing as npt
+from lancedb import LanceDBConnection
+from lancedb.table import LanceTable
 from mcp.server import MCPServer
 from rgapi import fd
 from sentence_transformers import SentenceTransformer
 
 ROOT = Path("/Users/joao.palmeiro/Documents/GitHub")
 REPOS = ["python-playground"]
-INDEX_PATH = Path(__file__).parent / "index.npz"
+DB_PATH = Path(__file__).parent / "index.lancedb"
+TABLE_NAME = "files"
 
 SKIP_DIRS = [".git", ".venv"]
 
@@ -23,36 +23,34 @@ model = SentenceTransformer(
 mcp = MCPServer("code-search")
 
 
-@cache
-def load_index() -> tuple[list[str], npt.NDArray[np.float32]]:
-    if INDEX_PATH.exists():
-        data = np.load(INDEX_PATH)
-        return data["paths"].tolist(), data["embeddings"]
+def load_index() -> LanceTable:
+    # `lancedb.connect` returns the generic `DBConnection`, whose tables don't type vector queries.
+    db = LanceDBConnection(DB_PATH)
+    if TABLE_NAME in db.list_tables().tables:
+        return db.open_table(TABLE_NAME)
 
     # `hidden=True` walks dot-folders too, so only the ones in `SKIP_DIRS` are skipped (with their subtrees).
     files: list[Path] = fd(root=[ROOT / repo for repo in REPOS], ext="py", hidden=True, skip_dir=SKIP_DIRS)
 
     documents = [f"title: {file.relative_to(ROOT)} | text: {file.read_text()}" for file in files]
     embeddings = model.encode(documents, batch_size=4, show_progress_bar=True)
-    paths = [str(file) for file in files]
 
-    np.savez(INDEX_PATH, paths=np.array(paths), embeddings=embeddings)
-
-    return paths, embeddings
+    # Each row keeps the file path next to its vector, so no separate metadata file is needed.
+    rows = [{"path": str(file), "vector": embedding} for file, embedding in zip(files, embeddings, strict=True)]
+    return db.create_table(TABLE_NAME, data=rows)
 
 
 @mcp.tool()
 def search_code(query: str, top_k: int = 5) -> str:
     """Semantic search over the Python files of selected local repos. Returns the most relevant file paths."""
-    paths, embeddings = load_index()
+    table = load_index()
     query_embedding = model.encode(query, prompt_name="CodeRetrieval", show_progress_bar=False)
 
-    scores = model.similarity(query_embedding, embeddings)[0]
-    top = scores.topk(top_k)
+    # Without a vector index, LanceDB compares the query against every row (exact search).
+    results = table.search(query_embedding).distance_type("cosine").select(["path", "_distance"]).limit(top_k).to_list()
 
-    return "\n".join(
-        f"{score:.3f} {paths[i]}" for score, i in zip(top.values.tolist(), top.indices.tolist(), strict=True)
-    )
+    # Cosine distance is `1 - cosine similarity`, so convert it back to a similarity score.
+    return "\n".join(f"{1 - row['_distance']:.3f} {row['path']}" for row in results)
 
 
 if __name__ == "__main__":

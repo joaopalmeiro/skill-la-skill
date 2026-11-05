@@ -3,6 +3,7 @@ name = "code-search-mcp"
 version = "0.0.0"
 requires-python = ">=3.12"
 dependencies = [
+    "lancedb==0.41.0",
     "mcp[cli]==2.3.0",
     "mypy==1.20.1",
     "rgapi==0.2.3",
