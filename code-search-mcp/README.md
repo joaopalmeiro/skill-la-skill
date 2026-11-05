@@ -49,6 +49,10 @@ uv audit --verbose
 ```
 
 ```bash
+uv run server.py
+```
+
+```bash
 uv run mcp dev server.py
 ```
 

@@ -30,18 +30,22 @@ class Hit(TypedDict):
     score: float
 
 
+def build_index(db: LanceDBConnection) -> LanceTable:
+    files: list[Path] = fd(root=[ROOT / repo for repo in REPOS], ext=["py"], hidden=True, skip_dir=SKIP_DIRS)
+
+    documents = [f"title: {file.relative_to(ROOT)} | text: {file.read_text()}" for file in files]
+    embeddings = model.encode(documents, batch_size=32, show_progress_bar=True)
+
+    rows = [{"path": str(file), "vector": embedding} for file, embedding in zip(files, embeddings, strict=True)]
+    return db.create_table(TABLE_NAME, data=rows, mode="overwrite")
+
+
 def load_index() -> LanceTable:
     db = LanceDBConnection(DB_PATH)
     try:
         return db.open_table(TABLE_NAME)
     except ValueError:
-        files: list[Path] = fd(root=[ROOT / repo for repo in REPOS], ext=["py"], hidden=True, skip_dir=SKIP_DIRS)
-
-        documents = [f"title: {file.relative_to(ROOT)} | text: {file.read_text()}" for file in files]
-        embeddings = model.encode(documents, batch_size=4, show_progress_bar=True)
-
-        rows = [{"path": str(file), "vector": embedding} for file, embedding in zip(files, embeddings, strict=True)]
-        return db.create_table(TABLE_NAME, data=rows)
+        return build_index(db)
 
 
 @mcp.tool(
@@ -55,3 +59,7 @@ def search_code(query: str, top_k: int = 5) -> list[Hit]:
     results = table.search(query_embedding).distance_type("cosine").select(["path", "_distance"]).limit(top_k).to_list()
 
     return [{"path": row["path"], "score": 1 - row["_distance"]} for row in results]
+
+
+if __name__ == "__main__":
+    build_index(LanceDBConnection(DB_PATH))
