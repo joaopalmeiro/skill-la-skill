@@ -9,7 +9,8 @@ from rgapi import fd
 from sentence_transformers import SentenceTransformer
 
 ROOT = Path("/Users/joao.palmeiro/Documents/GitHub")
-REPOS = ["python-playground"]
+REPOS = ["ai-playground", "python-playground"]
+
 DB_PATH = Path(__file__).parent / "index"
 TABLE_NAME = "files"
 
@@ -19,7 +20,7 @@ model = SentenceTransformer(
     "google/embeddinggemma-2",
     revision="914f7f89142e33e77833254d9c9b90c3cef7303b",
     config_kwargs={"vision_config": None, "audio_config": None},
-    processor_kwargs={"model_max_length": 8192},
+    processor_kwargs={"model_max_length": 8192, "truncation_side": "right"},
 )
 
 mcp = MCPServer("Code Search")
@@ -34,7 +35,7 @@ def build_index(db: LanceDBConnection) -> LanceTable:
     files: list[Path] = fd(root=[ROOT / repo for repo in REPOS], ext=["py"], hidden=True, skip_dir=SKIP_DIRS)
 
     documents = [f"title: {file.relative_to(ROOT)} | text: {file.read_text()}" for file in files]
-    embeddings = model.encode(documents, batch_size=32, show_progress_bar=True)
+    embeddings = model.encode(documents, batch_size=1, show_progress_bar=True)
 
     rows = [{"path": str(file), "vector": embedding} for file, embedding in zip(files, embeddings, strict=True)]
     return db.create_table(TABLE_NAME, data=rows, mode="overwrite")
