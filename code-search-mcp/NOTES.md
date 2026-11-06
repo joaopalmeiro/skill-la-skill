@@ -46,3 +46,10 @@
   - https://opentelemetry.io/docs/languages/sdk-configuration/general/#otel_service_name
   - https://github.com/modelcontextprotocol/python-sdk/blob/77001c96f9507be0f4d009b83210a384a5e08bda/src/mcp/server/_otel.py#L14
   - https://opentelemetry.io/docs/specs/semconv/registry/attributes/mcp/
+  - https://arize.com/docs/phoenix/tracing/how-to-tracing/importing-and-exporting-traces/importing-existing-traces
+  - https://github.com/Arize-ai/openinference
+  - https://mlflow.org/docs/latest/genai/tracing/
+    - https://mlflow.org/docs/latest/genai/tracing/opentelemetry/ingest/
+    - https://mlflow.org/docs/latest/genai/tracing/quickstart/#view-your-traces-on-the-mlflow-ui
+    - https://mlflow.org/docs/latest/api_reference/rest-api.html
+    - https://mlflow.org/docs/latest/api_reference/rest-api.html#export-traces

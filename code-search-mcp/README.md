@@ -57,6 +57,14 @@ uv run mcp dev server.py
 ```
 
 ```bash
+uv run mlflow server
+```
+
+```bash
+uv run ingest_mlflow.py
+```
+
+```bash
 uv run mypy
 ```
 

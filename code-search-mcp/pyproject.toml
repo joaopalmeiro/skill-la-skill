@@ -3,8 +3,10 @@ name = "code-search-mcp"
 version = "0.0.0"
 requires-python = ">=3.12"
 dependencies = [
+    "httpx2==2.16.0",
     "lancedb==0.41.0",
     "mcp[cli]==2.3.0",
+    "mlflow==3.17.2",
     "mypy==1.20.1",
     "opentelemetry-exporter-otlp-json-file==0.66b2",
     "opentelemetry-sdk==1.45.2",
