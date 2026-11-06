@@ -4,6 +4,7 @@ from typing import TypedDict
 from lancedb import LanceDBConnection
 from lancedb.table import LanceTable
 from mcp.server import MCPServer
+from mcp.server.context import CallNext, HandlerResult, ServerRequestContext
 from mcp.types import ToolAnnotations
 from opentelemetry import trace
 from opentelemetry.exporter.otlp.json.file import FileSpanExporter
@@ -34,7 +35,24 @@ model = SentenceTransformer(
     processor_kwargs={"model_max_length": 8192, "truncation_side": "right"},
 )
 
-mcp = MCPServer("Code Search")
+
+async def tool_call_middleware(ctx: ServerRequestContext, call_next: CallNext) -> HandlerResult:
+    if ctx.method != "tools/call":
+        return await call_next(ctx)
+
+    span = trace.get_current_span()
+
+    arguments = (ctx.params or {}).get("arguments") or {}
+    span.set_attribute("gen_ai.tool.call.arguments", arguments)
+
+    result = await call_next(ctx)
+
+    span.set_attribute("gen_ai.tool.call.result", result)
+
+    return result
+
+
+mcp = MCPServer("Code Search", middleware=[tool_call_middleware])
 
 
 class Hit(TypedDict):

@@ -42,5 +42,7 @@
   - https://opentelemetry.io/docs/languages/python/instrumentation/
   - https://opentelemetry.io/docs/languages/js/instrumentation/#picking-the-right-span-processor
     - "In most cases, stick with `BatchSpanProcessor` over `SimpleSpanProcessor`."
-    - `SimpleSpanProcessor`: "This can be helpful in scenarios where you do not want to risk losing a batch, or if you’re experimenting with OpenTelemetry in development."
+    - `SimpleSpanProcessor`: "This can be helpful in scenarios where you do not want to risk losing a batch, or if you're experimenting with OpenTelemetry in development."
   - https://opentelemetry.io/docs/languages/sdk-configuration/general/#otel_service_name
+  - https://github.com/modelcontextprotocol/python-sdk/blob/77001c96f9507be0f4d009b83210a384a5e08bda/src/mcp/server/_otel.py#L14
+  - https://opentelemetry.io/docs/specs/semconv/registry/attributes/mcp/
