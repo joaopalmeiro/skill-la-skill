@@ -5,6 +5,11 @@ from lancedb import LanceDBConnection
 from lancedb.table import LanceTable
 from mcp.server import MCPServer
 from mcp.types import ToolAnnotations
+from opentelemetry import trace
+from opentelemetry.exporter.otlp.json.file import FileSpanExporter
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import SimpleSpanProcessor
 from rgapi import fd
 from sentence_transformers import SentenceTransformer
 
@@ -15,6 +20,12 @@ DB_PATH = Path(__file__).parent / "index"
 TABLE_NAME = "files"
 
 SKIP_DIRS = [".git", ".venv"]
+
+TRACES_PATH = Path(__file__).parent / "traces.jsonl"
+
+tracer_provider = TracerProvider(resource=Resource.create({"service.name": "code-search"}))
+tracer_provider.add_span_processor(SimpleSpanProcessor(FileSpanExporter(TRACES_PATH)))
+trace.set_tracer_provider(tracer_provider)
 
 model = SentenceTransformer(
     "google/embeddinggemma-2",

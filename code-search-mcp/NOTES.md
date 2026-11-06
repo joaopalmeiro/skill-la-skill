@@ -38,3 +38,9 @@
   - https://arize.com/phoenix/
   - https://arize.com/docs/phoenix
   - https://opentelemetry.io/docs/specs/otel/protocol/file-exporter/
+  - https://github.com/open-telemetry/opentelemetry-python/tree/main/exporter/opentelemetry-exporter-otlp-json-file
+  - https://opentelemetry.io/docs/languages/python/instrumentation/
+  - https://opentelemetry.io/docs/languages/js/instrumentation/#picking-the-right-span-processor
+    - "In most cases, stick with `BatchSpanProcessor` over `SimpleSpanProcessor`."
+    - `SimpleSpanProcessor`: "This can be helpful in scenarios where you do not want to risk losing a batch, or if you’re experimenting with OpenTelemetry in development."
+  - https://opentelemetry.io/docs/languages/sdk-configuration/general/#otel_service_name
