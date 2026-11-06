@@ -47,7 +47,7 @@ async def tool_call_middleware(ctx: ServerRequestContext, call_next: CallNext) -
 
     result = await call_next(ctx)
 
-    span.set_attribute("gen_ai.tool.call.result", result)
+    span.set_attribute("gen_ai.tool.call.result", result["structuredContent"]["result"])
 
     return result
 
