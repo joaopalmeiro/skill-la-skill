@@ -29,3 +29,12 @@
 - https://py.sdk.modelcontextprotocol.io/servers/structured-output/
 - https://en.wikipedia.org/wiki/Cosine_similarity
 - https://huggingface.co/google/embeddinggemma-2/blob/914f7f89142e33e77833254d9c9b90c3cef7303b/config_sentence_transformers.json#L37: `"similarity_fn_name": "cosine"`
+- https://py.sdk.modelcontextprotocol.io/advanced/middleware/
+  - https://py.sdk.modelcontextprotocol.io/run/opentelemetry/
+  - https://www.jaegertracing.io/
+  - https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/
+  - https://github.com/open-telemetry/semantic-conventions-genai
+  - https://github.com/open-telemetry/semantic-conventions
+  - https://arize.com/phoenix/
+  - https://arize.com/docs/phoenix
+  - https://opentelemetry.io/docs/specs/otel/protocol/file-exporter/
