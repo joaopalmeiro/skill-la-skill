@@ -45,6 +45,7 @@
 - https://github.com/vercel-labs/agent-skills/blob/f8a72b9603728bb92a217a879b7e62e43ad76c81/skills/react-best-practices/rules/rerender-derived-state-no-effect.md?plain=1#L40: "References: [You Might Not Need an Effect](https://react.dev/learn/you-might-not-need-an-effect)"
 - https://github.com/vercel-labs/agent-skills/blob/f8a72b9603728bb92a217a879b7e62e43ad76c81/skills/react-native-skills/AGENTS.md?plain=1#L426: "- Minimize useState/useEffect hooks"
 - `git diff main...HEAD`
+- https://mcp-explained.com/
 
 ## Snippets
 
